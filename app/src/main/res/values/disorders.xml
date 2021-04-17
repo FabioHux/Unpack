@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="disorders">
+        <item>Depression</item>
+        <item>Anxiety</item>
+        <item>Eating Disorders</item>
+        <item>ADHD</item>
+        <item>PTSD</item>
+        <item>Substance Abuse</item>
+        <item>Bipolar Disorders</item>
+        <item>Schizophrenia</item>
+    </array>
+</resources>
