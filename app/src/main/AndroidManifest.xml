@@ -11,6 +11,7 @@
         android:theme="@style/Theme.Unpack">
         <activity android:name=".Questionnaire"></activity>
         <activity android:name=".ResourceList" />
+        <activity android:name=".Disorder" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

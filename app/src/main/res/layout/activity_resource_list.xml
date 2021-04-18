@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ResourceList"
-    android:background="#25aae1">
+    tools:context=".ResourceList">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,23 +19,23 @@
             android:id="@+id/resources_title"
             android:text="Resources"
             android:layout_centerHorizontal="true"/>
-
         <ImageButton
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginTop="5dp"
+            android:onClick="goBackHome"
             android:layout_marginEnd="5dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/house"
-            android:paddingTop="3sp" />
-<ImageView
-    android:layout_width="50dp"
-    android:layout_height="50dp"
-    android:background="@drawable/unpack_logo_small_size"
-    android:layout_marginTop="10dp"
-    android:layout_marginEnd="38dp"
-    />
+            android:paddingTop="3sp"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/unpack_logo_small_size"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="38dp"
+            />
     </RelativeLayout>
 
     <ListView

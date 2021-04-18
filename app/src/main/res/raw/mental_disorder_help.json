@@ -1,0 +1,58 @@
+{
+    "disorders": [
+      {
+        "name": "Depression",
+        "number": "800-273-8255",
+        "URLs": [
+            "https://www.psychiatry.org/patients-families/depression"
+        ]
+      },
+      {
+        "name": "Anxiety",
+        "URLs": [
+            "https://adaa.org/"
+        ]
+      },
+      {
+        "name": "Eating Disorders",
+        "number": "800-931-2237",
+        "URLs": [
+            "https://www.nationaleatingdisorders.org/help-support/contact-helpline"
+        ]
+      },
+      {
+        "name": "ADHD",
+        "URLs": [
+            "https://www.cdc.gov/ncbddd/adhd/treatment.html"        
+        ]
+      },
+
+      {
+        "name": "PTSD",
+        "URLs": [
+            "https://www.psychiatry.org/patients-families/ptsd"        
+        ]
+      },      
+      {
+        "name": "Substance Abuse",
+        "number": " 1-800-662-4357",
+        "URLs": [
+            "https://www.samhsa.gov/find-help/national-helpline"        
+        ]
+      },      
+      {
+        "name": "Bipolar Disorders",
+        "number": " 1-800-662-4357",
+        "URLs": [
+            "https://www.helpguide.org/articles/bipolar-disorder/living-with-bipolar-disorder.htm"        
+        ]
+      },      
+      {
+        "name": "Schizophrenia",
+        "number": "1-800-950-6264",
+        "URLs": [
+            "https://www.psychiatry.org/patients-families/schizophrenia"        
+        ]
+      }
+    ]
+  }
