@@ -3,7 +3,7 @@
     {
       "name": "Depression",
       "symptoms": "The Symptoms of depression are\nFeelings of sadness, tearfulness, emptiness or hopelessness\nAngry outbursts, irritability or frustration, even over small matters\nLoss of interest or pleasure in most or all normal activities, such as sex, hobbies or sports\nSleep disturbances, including insomnia or sleeping too much\nTiredness and lack of energy, so even small tasks take extra effort\nReduced appetite and weight loss or increased cravings for food and weight gain\nSlowed thinking, speaking or body movements\n",
-      "number": "800-273-8255"
+      "number": ["800-273-8255"]
       ,
       "URLs": [
         "https://www.psychiatry.org/patients-families/depression"
@@ -19,7 +19,7 @@
     {
       "name": "Eating Disorders",
       "symptoms": "Symptoms\nPreoccupation with weight\nRefusal to eat certain foods\nAppears uncomfortable eating around others\nSkipping meals \nExtreme mood sings\nDizziness\nFainting\nSleep problems\nStomach cramps\n",
-      "number": "800-931-2237",
+      "number": ["800-931-2237"],
       "URLs": [
         "https://www.nationaleatingdisorders.org/help-support/contact-helpline"
       ]
@@ -41,7 +41,7 @@
     {
       "name": "Substance Abuse",
       "symptoms": "Symptoms\nFeeling that you have to use the drug regularly\nHaving intense urges for the drug that block out any other thoughts\nOver time, needing more of the drug to get the same effect\nMaking certain that you maintain a supply of the drug\nDoing things to get the drug that you normally wouldnt do \nExperiencing withdrawal symptoms when you attempt to stop taking the drug\nNeglected appearance\nLack of energy and motivation\n",
-      "number": " 1-800-662-4357",
+      "number": ["1-800-662-4357"],
       "URLs": [
         "https://www.samhsa.gov/find-help/national-helpline"
       ]
@@ -49,7 +49,7 @@
     {
       "name": "Bipolar Disorders",
       "symptoms": "Symptoms\n Increased activity, energy, or agitation\nExaggerated sense of well being and self confidence\nDecreased need for sleep\nPacing thoughts \ndistractibility\nFatigue or loss of energy\nFeeling of worthlessness or excessive or inappropriate guilt\nDecreased ability to think or concentrate\n",
-      "number": " 1-800-662-4357",
+      "number": [" 1-800-662-4357"],
       "URLs": [
         "https://www.helpguide.org/articles/bipolar-disorder/living-with-bipolar-disorder.htm"
       ]
@@ -57,7 +57,7 @@
     {
       "name": "Schizophrenia",
       "symptoms": "Symptoms\nHallucinations\nDelusions\nDisorganised thinking\nLack of motivation\nSlow movement \nChange in sleep patterns \nLess interest in social activities \nChanges in body language and emotions\n",
-      "number": "1-800-950-6264",
+      "number": ["1-800-950-6264"],
       "URLs": [
         "https://www.psychiatry.org/patients-families/schizophrenia"
       ]
