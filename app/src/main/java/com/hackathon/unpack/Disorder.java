@@ -74,15 +74,6 @@ public class Disorder extends AppCompatActivity {
 
         locationListView.setAdapter(locationAdapter);
 
-        locationListView.setOnItemClickListener((parent, view, position, id) -> {
-            Uri loc= Uri.parse(((Clinic)parent.getSelectedItem()).location);
-            Intent locationIntent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(loc);
-            if (intent.resolveActivity(getPackageManager()) != null){
-                startActivity(intent);
-            }
-        });
-
         try {
             InputStream is = getResources().openRawResource(R.raw.mental_disorder_help);
             Writer writer = new StringWriter();
@@ -106,12 +97,12 @@ public class Disorder extends AppCompatActivity {
                 if (resource.getString("name").equals(disorder)) {
 
                     try {
-                        JSONArray urls = resource.getJSONArray("URLs");
-                        int len2 = urls.length();
-                        for (int j = 0; j < len2; j++) {
-                            websiteAdapter.add(urls.getString(j));
-                        }
-                        websiteAdapter.notifyDataSetChanged();
+                    JSONArray urls = resource.getJSONArray("URLs");
+                    int len2 = urls.length();
+                    for (int j = 0; j < len2; j++) {
+                        websiteAdapter.add(urls.getString(j));
+                    }
+                    websiteAdapter.notifyDataSetChanged();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

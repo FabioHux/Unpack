@@ -13,14 +13,21 @@ public class ClinicAdapter extends ArrayAdapter<Clinic> {
     public ClinicAdapter(Context context, ArrayList<Clinic> users) {
         super(context, 0, users);
     }
+    ArrayList<Clinic> clinics=new ArrayList<>();
     private static class ViewHolder {
         TextView name;
         TextView location;
     }
 
+    public Clinic get(int position){
+        return clinics.get(position);
+    }
+    public void add(Clinic clinic){
+        clinics.add(clinic);
+        super.add(clinic);
+    }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
 
         Clinic clinic = getItem(position);
         ViewHolder viewHolder; // view lookup cache stored in tag
