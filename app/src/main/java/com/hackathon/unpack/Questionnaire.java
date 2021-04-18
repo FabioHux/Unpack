@@ -2,10 +2,15 @@ package com.hackathon.unpack;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,8 +24,11 @@ public class Questionnaire extends AppCompatActivity {
     private int numDisorders;
     private int[] scores, buttonIDs;
 
+    private final int THRESHOLD = 10;
+
     private RadioGroup optiongroup;
     private TextView question_title;
+    private Button[] disorders;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +37,7 @@ public class Questionnaire extends AppCompatActivity {
         optiongroup = findViewById(R.id.options);
         question_title = findViewById(R.id.question_tv);
         numDisorders = getResources().getStringArray(R.array.disorders).length;
+        disorders = new Button[]{findViewById(R.id.disorder_one), findViewById(R.id.disorder_two), findViewById(R.id.disorder_three)};
 
         currentQuestions = new ArrayList<>();
         setUpQuestions();
@@ -906,6 +915,7 @@ public class Questionnaire extends AppCompatActivity {
 
     public void setNextQuestion(View view){
         if(selectedIndex >= 0){
+            Log.i("DEPRESSION SCORE", "" + scores[0]);
             optiongroup.removeAllViews();
 
             double[] result =  currentQuestions.get(index).getOptionScores()[selectedIndex];
@@ -918,11 +928,60 @@ public class Questionnaire extends AppCompatActivity {
             index++;
 
             if(index == currentQuestions.size()){
+                //Get top 3
+                int[] topIndices = new int[]{-1,-1,-1};
 
+                for(i = 0; i < scores.length; i++){
+                    int j = 2;
+                    while(j >= 0 && (topIndices[j] < 0 || scores[i] > scores[topIndices[j]])){
+                        int temp = topIndices[j];
+                        topIndices[j] = i;
+
+                        if(j != 2){
+                            topIndices[j + 1] = temp;
+                        }
+                        j--;
+                    }
+                }
+
+                if(currentQuestions.get(0).equals(generalQuestions.get(0))){
+                    currentQuestions.clear();
+                    for(int in : topIndices){
+                        if(scores[in] > THRESHOLD){
+                            currentQuestions.addAll(specificQuestions[in]);
+                        }
+                    }
+                    index = 0;
+                    buildQuestion(currentQuestions.get(index));
+                    selectedIndex = -1;
+                    scores = new int[numDisorders];
+                }else{
+                    ((LinearLayout) findViewById(R.id.questionnaire_layout)).removeView(optiongroup);
+                    ((RelativeLayout) findViewById(R.id.button_layout)).removeView(findViewById(R.id.next_button));
+                    if(scores[topIndices[0]] > THRESHOLD){
+                        question_title.setText("Our results show that you may have these conditions. Click on one of them to get some information. Remember to consult with a doctor to confirm what problems you may have.");
+                        for(i = 0; i < 3; i++){
+                            int in = topIndices[i];
+                            if(scores[in] > THRESHOLD){
+                                disorders[i].setText(getResources().getStringArray(R.array.disorders)[in]);
+                                disorders[i].setVisibility(View.VISIBLE);
+                            }
+                        }
+                    }else{
+                        question_title.setText("Our results show that you don't seem to strongly have any mental disorder. However, our results are not clinically accurate and you should always contact a medical professional if you believe something is troubling you.");
+                    }
+                }
             }else{
                 buildQuestion(currentQuestions.get(index));
+                selectedIndex = -1;
             }
         }
+    }
+
+    public void selectDisorder(View view){
+        Intent intent = new Intent(this, Disorder.class);
+        intent.putExtra("com.hackathon.unpack.disorder", ((TextView) view).getText().toString());
+        startActivity(intent);
     }
 
     private void buildQuestion(Question question){
