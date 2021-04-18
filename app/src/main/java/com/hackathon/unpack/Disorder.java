@@ -1,30 +1,31 @@
 package com.hackathon.unpack;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Disorder extends AppCompatActivity {
@@ -34,6 +35,8 @@ public class Disorder extends AppCompatActivity {
     private ArrayAdapter<String> websiteAdapter;
     private ListView phoneListView;
     private ArrayAdapter<String> phoneAdapter;
+    private ListView locationListView;
+    private ClinicAdapter locationAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +63,23 @@ public class Disorder extends AppCompatActivity {
 
         phoneListView.setAdapter(phoneAdapter);
 
-
         phoneListView.setOnItemClickListener((parent, view, position, id) -> {
             Intent phoneIntent = new Intent(Intent.ACTION_DIAL);
-            phoneIntent.setData(Uri.parse("tel:"+phoneAdapter.getItem(position)));
-            if (ActivityCompat.checkSelfPermission(this,
-                    Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-                startActivity(phoneIntent);
-            }
-            else{
-                Toast.makeText(getApplicationContext(),"Permission not granted. Cannot access phone",Toast.LENGTH_LONG).show();
+            phoneIntent.setData(Uri.parse("tel:" + phoneAdapter.getItem(position)));
+            startActivity(phoneIntent);
+        });
+
+        locationListView = (ListView) findViewById(R.id.cliniclocations);
+        locationAdapter = new ClinicAdapter(this, new ArrayList<Clinic>());
+
+        locationListView.setAdapter(locationAdapter);
+
+        locationListView.setOnItemClickListener((parent, view, position, id) -> {
+            Uri loc= Uri.parse(((Clinic)parent.getSelectedItem()).location);
+            Intent locationIntent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(loc);
+            if (intent.resolveActivity(getPackageManager()) != null){
+                startActivity(intent);
             }
         });
 
@@ -115,7 +125,16 @@ public class Disorder extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
+                    try {
+                        JSONArray clinics = resource.getJSONArray("location");
+                        int len2 = clinics.length();
+                        for (int j = 0; j < len2; j++) {
+                            JSONObject clinic=clinics.getJSONObject(j);
+                            locationAdapter.add(new Clinic(clinic.getString("name"),clinic.getString("address")));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     try {
                         ((TextView)findViewById(R.id.symptoms)).setText(resource.getString("symptoms"));
                     } catch (Exception e) {
@@ -127,5 +146,6 @@ public class Disorder extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
 
 }
