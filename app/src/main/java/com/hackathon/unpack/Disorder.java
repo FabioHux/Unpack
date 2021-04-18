@@ -71,24 +71,24 @@ public class Disorder extends AppCompatActivity {
                 json.append(scnr.next());
             }*/
 
-            JSONArray resources= new JSONArray(jsonString);
+            JSONArray resources= (new JSONObject(jsonString)).getJSONArray("disorders");
             int len = resources.length();
             for (int i = 0; i<len; i++) {
                 JSONObject resource=resources.getJSONObject(i);
                 if(resource.getString("name").equals(disorder)) {
-                    resource.getJSONArray("URLs");
-                    int len2 = resources.length();
+                    JSONArray urls = resource.getJSONArray("URLs");
+                    int len2 = urls.length();
                     for (int j = 0; j<len2; j++) {
-                        myAdapter.add((String)resources.get(i));
+                        myAdapter.add(urls.getString(j));
                     }
-                    break;
                 }
-                myAdapter.notifyDataSetChanged();
             }
+
+            myAdapter.notifyDataSetChanged();
         }catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    }
+}

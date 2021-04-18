@@ -2,7 +2,12 @@
     "disorders": [
       {
         "name": "Depression",
-        "number": "800-273-8255",
+        "symptoms": [
+
+        ],
+        "number": [
+          "800-273-8255"
+        ],
         "URLs": [
             "https://www.psychiatry.org/patients-families/depression"
         ]
