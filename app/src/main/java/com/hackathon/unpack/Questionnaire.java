@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -12,18 +15,28 @@ public class Questionnaire extends AppCompatActivity {
     private ArrayList<Question> generalQuestions;
     private ArrayList<Question>[] specificQuestions;
     private ArrayList<Question> currentQuestions;
-    private int index = 0;
-    private final int numDisorders = getResources().getStringArray(R.array.disorders).length;
+    private int index = 0, selectedIndex;
+    private int numDisorders;
+    private int[] scores, buttonIDs;
+
+    private RadioGroup optiongroup;
+    private TextView question_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionnaire);
+        optiongroup = findViewById(R.id.options);
+        question_title = findViewById(R.id.question_tv);
+        numDisorders = getResources().getStringArray(R.array.disorders).length;
+
         currentQuestions = new ArrayList<>();
         setUpQuestions();
         currentQuestions.addAll(generalQuestions);
 
-        setNextQuestion(null);
+        scores = new int[numDisorders];
+        buildQuestion(currentQuestions.get(index));
+        selectedIndex = -1;
     }
 
     private void setUpQuestions(){
@@ -892,7 +905,55 @@ public class Questionnaire extends AppCompatActivity {
     }
 
     public void setNextQuestion(View view){
+        if(selectedIndex >= 0){
+            optiongroup.removeAllViews();
 
+            double[] result =  currentQuestions.get(index).getOptionScores()[selectedIndex];
+
+            int i;
+            for(i = 0; i < result.length; i++){
+                scores[i] += result[i];
+            }
+
+            index++;
+
+            if(index == currentQuestions.size()){
+
+            }else{
+                buildQuestion(currentQuestions.get(index));
+            }
+        }
+    }
+
+    private void buildQuestion(Question question){
+        question_title.setText(question.getQuestion());
+        setOptions(question.getOptions());
+    }
+
+    private void setOptions(String[] options){
+        int i = 0;
+        buttonIDs = new int[options.length];
+        for(;i < options.length; i++){
+            RadioButton button = new RadioButton(this);
+            int id = View.generateViewId();
+            buttonIDs[i] = id;
+
+            button.setId(id);
+            button.setText(options[i]);
+            button.setOnClickListener(this::radioButtonClick);
+            optiongroup.addView(button);
+        }
+    }
+
+    public void radioButtonClick(View view){
+        int id = view.getId();
+
+        int i;
+        for(i = 0; i < buttonIDs.length; i++){
+            if(buttonIDs[i] == id) break;
+        }
+
+        selectedIndex = i;
     }
 
     private class Question{
@@ -900,8 +961,20 @@ public class Questionnaire extends AppCompatActivity {
         private String question;
         private String[] options;
         private double[][] optionScores;
+        private Question dependence = null;
 
         public Question(String question, String[] options, double[][] optionScores){
+            this.question = question;
+            this.options = options;
+            this.optionScores = optionScores;
+
+            if(this.optionScores.length != this.options.length ||
+                    this.optionScores[0].length != numDisorders)
+                throw new RuntimeException("Formatting for questions built incorrectly. Exiting.");
+        }
+
+        public Question(String question, String[] options, double[][] optionScores, Question dependence){
+            this.dependence = dependence;
             this.question = question;
             this.options = options;
             this.optionScores = optionScores;
@@ -921,6 +994,18 @@ public class Questionnaire extends AppCompatActivity {
 
         public double[][] getOptionScores(){
             return optionScores;
+        }
+
+        public void passDependence(Question dependence, double[] scores){
+            if(this.dependence != null && dependence != null && this.dependence.equals(dependence)){
+                int i = 0;
+                for(;i < optionScores.length; i++){
+                    int j = 0;
+                    for(;j < optionScores[i].length; j++){
+                        optionScores[i][j] *= scores[j];
+                    }
+                }
+            }
         }
     }
 }
