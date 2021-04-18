@@ -945,10 +945,10 @@ public class Questionnaire extends AppCompatActivity {
                     }
                 }
 
-                if(currentQuestions.get(0).equals(generalQuestions.get(0))){
+                if(currentQuestions.get(0).equals(generalQuestions.get(0)) && scores[topIndices[0]] > THRESHOLD){
                     currentQuestions.clear();
-                    for(int in : topIndices){
-                        if(scores[in] > THRESHOLD){
+                    for (int in : topIndices) {
+                        if (scores[in] > THRESHOLD) {
                             currentQuestions.addAll(specificQuestions[in]);
                         }
                     }
