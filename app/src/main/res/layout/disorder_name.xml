@@ -9,4 +9,5 @@
         android:id="@+id/disorder_name_tv"
         android:textAlignment="center"
         android:textSize="24sp"/>
+
 </RelativeLayout>
