@@ -7,14 +7,28 @@
       ,
       "URLs": [
         "https://www.psychiatry.org/patients-families/depression"
-      ]
+      ],
+      "location":
+              [
+                {
+                  "name": "Potomac Behavioral Solutions",
+                  "address": "1901 South Bell St, Suite 1125, Arlington, VA 22202"
+                }
+              ]
     },
     {
       "name": "Anxiety",
       "symptoms": "Symptoms \n Excessive Worrying \nFeeling agitated\nRestlessness\nFatigue\nDifficulty concentrating\nIrritability\nTense muscles\nPanic attacks\n",
       "URLs": [
         "https://adaa.org/"
-      ]
+      ],
+      "location":
+              [
+                {
+                  "name": "Anxiety & Phobia Treatment Center",
+                  "address": "1444 Duke St, Alexandria, VA 22314"
+                }
+              ]
     },
     {
       "name": "Eating Disorders",
@@ -22,21 +36,42 @@
       "number": ["800-931-2237"],
       "URLs": [
         "https://www.nationaleatingdisorders.org/help-support/contact-helpline"
-      ]
+      ],
+      "location":
+              [
+                {
+                  "name":"Prosperity Eating Disorders and Wellness Center",
+                  "address": "1031 Sterling Rd #203, Herndon, VA 20170"
+                }
+              ]
     },
     {
       "name": "ADHD",
       "symptoms": "Symptoms\nhaving a short attention span and being easily distracted\n Making careless mistakes\nAppearing forgetful or losing things\nBeing unable to stick to task that are time consuming\nConstantly changing activity or task \nBeing unable to sit still\nConstantly fidgeting\nExcessive talking\n",
       "URLs": [
         "https://www.cdc.gov/ncbddd/adhd/treatment.html"
-      ]
+      ],
+      "location":
+              [
+                {
+                  "name": "ADHD Clinic",
+                  "address": " 3534 Carlin Springs Rd #5, Falls Church, VA 22041"
+                }
+              ]
     },
     {
       "name": "PTSD",
       "symptoms": "Symptoms\nReliving the traumatic event as if were happening again \nUpsetting dreams or nightmares about the traumatic event\nHopelessness about the future\nMemory problems \nDifficulty maintaining close relationships\nFeeling emotionally numb\nBeing easily startled or frightened\n",
       "URLs": [
         "https://www.psychiatry.org/patients-families/ptsd"
-      ]
+      ],
+      "location":
+              [
+                {
+                  "name": "The Center for Connection, Healing & Change, LLC",
+                  "address": "12751 Marblestone Dr #200, Woodbridge, VA 22192"
+                }
+              ]
     },
     {
       "name": "Substance Abuse",
@@ -44,7 +79,14 @@
       "number": ["1-800-662-4357"],
       "URLs": [
         "https://www.samhsa.gov/find-help/national-helpline"
-      ]
+      ],
+      "location":
+              [
+                {
+                  "name": "Recovery Unplugged® - Drug & Alcohol Rehab",
+                  "address": "5105Q Backlick Rd, Annandale, VA 2200"
+                }
+              ]
     },
     {
       "name": "Bipolar Disorders",
@@ -52,7 +94,14 @@
       "number": [" 1-800-662-4357"],
       "URLs": [
         "https://www.helpguide.org/articles/bipolar-disorder/living-with-bipolar-disorder.htm"
-      ]
+      ],
+      "location":
+              [
+                {
+                  "name": "PACE Mental Health Springfield",
+                  "address": "8348 Traford Ln #301, Springfield, VA 22152"
+                }
+              ]
     },
     {
       "name": "Schizophrenia",
@@ -60,7 +109,14 @@
       "number": ["1-800-950-6264"],
       "URLs": [
         "https://www.psychiatry.org/patients-families/schizophrenia"
-      ]
+      ],
+      "location":
+              [
+                {
+                  "name": "Care Clinic",
+                  "address": "4017 Williamsburg Ct Suite 100, Fairfax, VA 22032"
+                }
+              ]
     }
   ]
 }
