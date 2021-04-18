@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/questionnaire_layout"
     tools:context=".Questionnaire">
     <TextView
         android:layout_width="match_parent"
@@ -19,12 +20,37 @@
         android:id="@+id/options"/>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/button_layout">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="setNextQuestion"
             android:text="Next"
+            android:id="@+id/next_button"
             android:layout_alignParentRight="true"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="selectDisorder"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:id="@+id/disorder_one"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="selectDisorder"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/disorder_one"
+            android:visibility="gone"
+            android:id="@+id/disorder_two"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="selectDisorder"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/disorder_two"
+            android:visibility="gone"
+            android:id="@+id/disorder_three"/>
     </RelativeLayout>
 </LinearLayout>
