@@ -54,10 +54,10 @@ public class Questionnaire extends AppCompatActivity {
         generalQuestions.add(new Question(
                 "In General when experiencing a mental health episode which one of the following best describes it?",
                 new String[]{
-                        "Pressure in the chest and is usually accompanied with increased heart rate.",
+                        "Pressure in the chest and is usually accompanied by increased heart rate.",
                         "It's never an episode, just something that always seems to be there or comes and goes in waves.",
                         "The Episode can be tied to a physical thing or an event.",
-                        "I dont think it's a problem. I have been told it is one.",
+                        "I don't think it's a problem. I have been told it is one.",
                         "None of the Above"
                 },
                 new double[][]{
@@ -75,7 +75,7 @@ public class Questionnaire extends AppCompatActivity {
                         "Worried",
                         "Little Interest in things",
                         "Hopeless",
-                        "mood swings",
+                        "Mood Swings",
                         "None of the Above"
                 },
                 new double[][]{
@@ -89,18 +89,20 @@ public class Questionnaire extends AppCompatActivity {
         ));
 
         generalQuestions.add(new Question(
-                "In the last two weeks How often did you feel that way?",
+                "In the last two weeks, how often did you feel that way?",
                 new String[]{
                         "only one",
                         "A couple days",
                         "more days than not",
                         "Everyday",
+                        "None of the above"
                 },
                 new double[][]{
                         new double[]{1,1,1,1,1,1,1,1},
                         new double[]{1.1,1.1,1.1,1.1,1.1,1.1,1.1,1.1},
                         new double[]{1.2,1.2,1.2,1.2,1.2,1.2,1.2,1.2},
                         new double[]{1.3,1.3,1.3,1.3,1.3,1.3,1.3,1.3},
+                        new double[]{0,0,0,0,0,0,0,0}
 
                 },
                 generalQuestions.get(generalQuestions.size()-1)
@@ -112,14 +114,17 @@ public class Questionnaire extends AppCompatActivity {
                         "Getting “Waked and Baked” or things like that?",
                         "Dreading getting out of bed.",
                         "Waking up in a cold sweat from a nightmare about something that happened in the past.",
-                        "You feel like someone is watching you."
+                        "You feel like someone is watching you.",
+                        "getting ready for the day ahead"
+
                 },
                 new double[][]{
                         new double[]{0,0,5,0,0,0,0,0},
                         new double[]{0,0,0,0,0,5,0,0},
                         new double[]{5,0,0,0,0,0,0,0},
                         new double[]{0,0,0,0,5,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,5}
+                        new double[]{0,0,0,0,0,0,0,7},
+                        new double[]{0,0,0,0,0,0,0,0}
 
                 }
         ));
@@ -127,18 +132,16 @@ public class Questionnaire extends AppCompatActivity {
         generalQuestions.add(new Question(
                 "How have your eating habits been?",
                 new String[]{
-                        "Less than usual",
+                        "Eating less than usual",
                         "Normal",
-                        "A lot more than usual",
-                        "I go through waves of not eating at all to overeating",
-                        "None of the above."
+                        "Eating A lot more than usual",
+                        "I go through waves of not eating at all to overeating"
                 },
                 new double[][]{
                         new double[]{0,0,2,0,0,0,0,0},
                         new double[]{0,0,0,0,0,0,0,0},
                         new double[]{0,0,3,0,0,0,0,0},
-                        new double[]{0,0,5,0,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,5,0,0,0,0,0}
 
                 }
         ));
@@ -183,14 +186,16 @@ public class Questionnaire extends AppCompatActivity {
                         "I don't really sleep",
                         "I can never fall asleep because something is always watching",
                         "Some nights I sleep a lot and then some night I can't seem to fall asleep.",
-                        "I would rather just sleep all day"
+                        "I would rather just sleep all day",
+                        "consistent every night"
                 },
                 new double[][]{
                         new double[]{0,0,0,0,5,0,0,0},
                         new double[]{2,5,0,0,0,0,0,0},
                         new double[]{0,0,0,0,0,0,0,5},
                         new double[]{5,0,0,0,0,0,0,0},
-                        new double[]{3,0,0,0,0,0,0,0}
+                        new double[]{3,0,0,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
 
                 }
         ));
@@ -221,19 +226,19 @@ public class Questionnaire extends AppCompatActivity {
                         "ADHD",
                         "PTSD",
                         "Substance Abuse",
-                        "Bipolar",
+                        "Bipolar Disorder",
                         "Schizophrenia",
-                        "none of the above"
+                        "None of the above"
                 },
                 new double[][]{
-                        new double[]{15,0,0,0,0,0,0,0},
-                        new double[]{0,15,0,0,0,0,0,0},
-                        new double[]{5,0,15,0,0,0,0,0},
-                        new double[]{0,0,0,15,0,0,0,0},
-                        new double[]{0,0,0,0,15,0,0,0},
-                        new double[]{0,0,0,0,0,15,0,0},
-                        new double[]{0,0,0,0,0,0,15,0},
-                        new double[]{0,0,0,0,0,0,0,15},
+                        new double[]{5,0,0,0,0,0,0,0},
+                        new double[]{0,5,0,0,0,0,0,0},
+                        new double[]{5,0,5,0,0,0,0,0},
+                        new double[]{0,0,0,5,0,0,0,0},
+                        new double[]{0,0,0,0,5,0,0,0},
+                        new double[]{0,0,0,0,0,5,0,0},
+                        new double[]{0,0,0,0,0,0,5,0},
+                        new double[]{0,0,0,0,0,0,0,5},
                         new double[]{0,0,0,0,0,0,0,0,}
 
                 }
@@ -255,10 +260,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{5,0,0,0,0,0,0,0},
-                        new double[]{3,0,0,0,0,0,0,0},
-                        new double[]{1,0,0,0,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{4,0,0,0,0,0,0,0},
+                        new double[]{2,0,0,0,0,0,0,0},
+                        new double[]{-1,0,0,0,0,0,0,0},
+                        new double[]{-2,0,0,0,0,0,0,0}
                 }
 
         ));
@@ -271,10 +276,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{5,0,0,0,0,0,0,0},
-                        new double[]{3,0,0,0,0,0,0,0},
-                        new double[]{1,0,0,0,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{4,0,0,0,0,0,0,0},
+                        new double[]{2,0,0,0,0,0,0,0},
+                        new double[]{-1,0,0,0,0,0,0,0},
+                        new double[]{-2,0,0,0,0,0,0,0}
                 }
 
         ));
@@ -287,10 +292,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{5,0,0,0,0,0,0,0},
-                        new double[]{3,0,0,0,0,0,0,0},
-                        new double[]{1,0,0,0,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{4,0,0,0,0,0,0,0},
+                        new double[]{2,0,0,0,0,0,0,0},
+                        new double[]{-1,0,0,0,0,0,0,0},
+                        new double[]{-2,0,0,0,0,0,0,0}
                 }
 
         ));
@@ -303,10 +308,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{5,0,0,0,0,0,0,0},
-                        new double[]{3,0,0,0,0,0,0,0},
-                        new double[]{1,0,0,0,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{4,0,0,0,0,0,0,0},
+                        new double[]{2,0,0,0,0,0,0,0},
+                        new double[]{-1,0,0,0,0,0,0,0},
+                        new double[]{-2,0,0,0,0,0,0,0}
                 }
 
         ));
@@ -319,10 +324,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{5,0,0,0,0,0,0,0},
-                        new double[]{3,0,0,0,0,0,0,0},
-                        new double[]{1,0,0,0,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{4,0,0,0,0,0,0,0},
+                        new double[]{2,0,0,0,0,0,0,0},
+                        new double[]{-1,0,0,0,0,0,0,0},
+                        new double[]{-2,0,0,0,0,0,0,0}
                 }
 
         ));
@@ -339,10 +344,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,5,0,0,0,0,0,0},
-                        new double[]{0,3,0,0,0,0,0,0},
-                        new double[]{0,1,0,0,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,4,0,0,0,0,0,0},
+                        new double[]{0,2,0,0,0,0,0,0},
+                        new double[]{0,-1,0,0,0,0,0,0},
+                        new double[]{0,-2,0,0,0,0,0,0}
                 }
 
         ));
@@ -355,10 +360,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,5,0,0,0,0,0,0},
-                        new double[]{0,3,0,0,0,0,0,0},
-                        new double[]{0,1,0,0,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,4,0,0,0,0,0,0},
+                        new double[]{0,2,0,0,0,0,0,0},
+                        new double[]{0,-1,0,0,0,0,0,0},
+                        new double[]{0,-2,0,0,0,0,0,0}
                 }
 
         ));
@@ -371,10 +376,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,5,0,0,0,0,0,0},
-                        new double[]{0,3,0,0,0,0,0,0},
-                        new double[]{0,1,0,0,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,4,0,0,0,0,0,0},
+                        new double[]{0,2,0,0,0,0,0,0},
+                        new double[]{0,-1,0,0,0,0,0,0},
+                        new double[]{0,-2,0,0,0,0,0,0}
                 }
 
         ));
@@ -387,10 +392,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,5,0,0,0,0,0,0},
-                        new double[]{0,3,0,0,0,0,0,0},
-                        new double[]{0,1,0,0,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,4,0,0,0,0,0,0},
+                        new double[]{0,2,0,0,0,0,0,0},
+                        new double[]{0,-1,0,0,0,0,0,0},
+                        new double[]{0,-2,0,0,0,0,0,0}
                 }
 
         ));
@@ -403,10 +408,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,5,0,0,0,0,0,0},
-                        new double[]{0,3,0,0,0,0,0,0},
-                        new double[]{0,1,0,0,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,4,0,0,0,0,0,0},
+                        new double[]{0,2,0,0,0,0,0,0},
+                        new double[]{0,-1,0,0,0,0,0,0},
+                        new double[]{0,-2,0,0,0,0,0,0}
                 }
 
         ));
@@ -424,10 +429,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,5,0,0,0,0,0},
-                        new double[]{0,0,3,0,0,0,0,0},
-                        new double[]{0,0,1,0,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,4,0,0,0,0,0},
+                        new double[]{0,0,2,0,0,0,0,0},
+                        new double[]{0,0,-1,0,0,0,0,0},
+                        new double[]{0,0,-2,0,0,0,0,0}
                 }
 
         ));
@@ -440,10 +445,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,5,0,0,0,0,0},
-                        new double[]{0,0,3,0,0,0,0,0},
-                        new double[]{0,0,1,0,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,4,0,0,0,0,0},
+                        new double[]{0,0,2,0,0,0,0,0},
+                        new double[]{0,0,-1,0,0,0,0,0},
+                        new double[]{0,0,-2,0,0,0,0,0}
                 }
 
         ));
@@ -456,10 +461,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,5,0,0,0,0,0},
-                        new double[]{0,0,3,0,0,0,0,0},
-                        new double[]{0,0,1,0,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,4,0,0,0,0,0},
+                        new double[]{0,0,2,0,0,0,0,0},
+                        new double[]{0,0,-1,0,0,0,0,0},
+                        new double[]{0,0,-2,0,0,0,0,0}
                 }
 
         ));
@@ -472,10 +477,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,5,0,0,0,0,0},
-                        new double[]{0,0,3,0,0,0,0,0},
-                        new double[]{0,0,1,0,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,4,0,0,0,0,0},
+                        new double[]{0,0,2,0,0,0,0,0},
+                        new double[]{0,0,-1,0,0,0,0,0},
+                        new double[]{0,0,-2,0,0,0,0,0}
                 }
 
         ));
@@ -488,10 +493,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,5,0,0,0,0,0},
-                        new double[]{0,0,3,0,0,0,0,0},
-                        new double[]{0,0,1,0,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,4,0,0,0,0,0},
+                        new double[]{0,0,2,0,0,0,0,0},
+                        new double[]{0,0,-1,0,0,0,0,0},
+                        new double[]{0,0,-2,0,0,0,0,0}
                 }
 
         ));
@@ -508,10 +513,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,5,0,0,0,0},
-                        new double[]{0,0,0,3,0,0,0,0},
-                        new double[]{0,0,0,1,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,4,0,0,0,0},
+                        new double[]{0,0,0,2,0,0,0,0},
+                        new double[]{0,0,0,-1,0,0,0,0},
+                        new double[]{0,0,0,-2,0,0,0,0}
                 }
 
         ));
@@ -524,10 +529,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,5,0,0,0,0},
-                        new double[]{0,0,0,3,0,0,0,0},
-                        new double[]{0,0,0,1,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,4,0,0,0,0},
+                        new double[]{0,0,0,2,0,0,0,0},
+                        new double[]{0,0,0,-1,0,0,0,0},
+                        new double[]{0,0,0,-2,0,0,0,0}
                 }
 
         ));
@@ -540,10 +545,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,5,0,0,0,0},
-                        new double[]{0,0,0,3,0,0,0,0},
-                        new double[]{0,0,0,1,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,4,0,0,0,0},
+                        new double[]{0,0,0,2,0,0,0,0},
+                        new double[]{0,0,0,-1,0,0,0,0},
+                        new double[]{0,0,0,-2,0,0,0,0}
                 }
 
         ));
@@ -556,10 +561,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,5,0,0,0,0},
-                        new double[]{0,0,0,3,0,0,0,0},
-                        new double[]{0,0,0,1,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,4,0,0,0,0},
+                        new double[]{0,0,0,2,0,0,0,0},
+                        new double[]{0,0,0,-1,0,0,0,0},
+                        new double[]{0,0,0,-2,0,0,0,0}
                 }
 
         ));
@@ -572,10 +577,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,5,0,0,0,0},
-                        new double[]{0,0,0,3,0,0,0,0},
-                        new double[]{0,0,0,1,0,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,4,0,0,0,0},
+                        new double[]{0,0,0,2,0,0,0,0},
+                        new double[]{0,0,0,-1,0,0,0,0},
+                        new double[]{0,0,0,-2,0,0,0,0}
                 }
 
         ));
@@ -591,10 +596,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,5,0,0,0},
-                        new double[]{0,0,0,0,3,0,0,0},
-                        new double[]{0,0,0,0,1,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,4,0,0,0},
+                        new double[]{0,0,0,0,2,0,0,0},
+                        new double[]{0,0,0,0,-1,0,0,0},
+                        new double[]{0,0,0,0,-2,0,0,0}
                 }
 
         ));
@@ -607,10 +612,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,5,0,0,0},
-                        new double[]{0,0,0,0,3,0,0,0},
-                        new double[]{0,0,0,0,1,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,4,0,0,0},
+                        new double[]{0,0,0,0,2,0,0,0},
+                        new double[]{0,0,0,0,-1,0,0,0},
+                        new double[]{0,0,0,0,-2,0,0,0}
                 }
 
         ));
@@ -623,10 +628,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,5,0,0,0},
-                        new double[]{0,0,0,0,3,0,0,0},
-                        new double[]{0,0,0,0,1,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,4,0,0,0},
+                        new double[]{0,0,0,0,2,0,0,0},
+                        new double[]{0,0,0,0,-1,0,0,0},
+                        new double[]{0,0,0,0,-2,0,0,0}
                 }
 
         ));
@@ -639,10 +644,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,5,0,0,0},
-                        new double[]{0,0,0,0,3,0,0,0},
-                        new double[]{0,0,0,0,1,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,4,0,0,0},
+                        new double[]{0,0,0,0,2,0,0,0},
+                        new double[]{0,0,0,0,-1,0,0,0},
+                        new double[]{0,0,0,0,-2,0,0,0}
                 }
 
         ));
@@ -655,10 +660,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,5,0,0,0},
-                        new double[]{0,0,0,0,3,0,0,0},
-                        new double[]{0,0,0,0,1,0,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,4,0,0,0},
+                        new double[]{0,0,0,0,2,0,0,0},
+                        new double[]{0,0,0,0,-1,0,0,0},
+                        new double[]{0,0,0,0,-2,0,0,0}
                 }
 
         ));
@@ -674,10 +679,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,0,5,0,0},
-                        new double[]{0,0,0,0,0,3,0,0},
-                        new double[]{0,0,0,0,0,1,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,0,4,0,0},
+                        new double[]{0,0,0,0,0,2,0,0},
+                        new double[]{0,0,0,0,0,-1,0,0},
+                        new double[]{0,0,0,0,0,-2,0,0}
                 }
 
         ));
@@ -690,10 +695,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,0,5,0,0},
-                        new double[]{0,0,0,0,0,3,0,0},
-                        new double[]{0,0,0,0,0,1,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,0,4,0,0},
+                        new double[]{0,0,0,0,0,2,0,0},
+                        new double[]{0,0,0,0,0,-1,0,0},
+                        new double[]{0,0,0,0,0,-2,0,0}
                 }
 
         ));
@@ -706,10 +711,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,0,5,0,0},
-                        new double[]{0,0,0,0,0,3,0,0},
-                        new double[]{0,0,0,0,0,1,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,0,4,0,0},
+                        new double[]{0,0,0,0,0,2,0,0},
+                        new double[]{0,0,0,0,0,-1,0,0},
+                        new double[]{0,0,0,0,0,-2,0,0}
                 }
 
         ));
@@ -722,10 +727,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,0,5,0,0},
-                        new double[]{0,0,0,0,0,3,0,0},
-                        new double[]{0,0,0,0,0,1,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,0,4,0,0},
+                        new double[]{0,0,0,0,0,2,0,0},
+                        new double[]{0,0,0,0,0,-1,0,0},
+                        new double[]{0,0,0,0,0,-2,0,0}
                 }
 
         ));
@@ -738,10 +743,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,0,5,0,0},
-                        new double[]{0,0,0,0,0,3,0,0},
-                        new double[]{0,0,0,0,0,1,0,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,0,4,0,0},
+                        new double[]{0,0,0,0,0,2,0,0},
+                        new double[]{0,0,0,0,0,-1,0,0},
+                        new double[]{0,0,0,0,0,-2,0,0}
                 }
 
         ));
@@ -757,10 +762,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,0,0,5,0},
-                        new double[]{0,0,0,0,0,0,3,0},
-                        new double[]{0,0,0,0,0,0,1,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,0,0,4,0},
+                        new double[]{0,0,0,0,0,0,2,0},
+                        new double[]{0,0,0,0,0,0,-1,0},
+                        new double[]{0,0,0,0,0,0,-2,0}
                 }
 
         ));
@@ -773,10 +778,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,0,0,5,0},
-                        new double[]{0,0,0,0,0,0,3,0},
-                        new double[]{0,0,0,0,0,0,1,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,0,0,4,0},
+                        new double[]{0,0,0,0,0,0,2,0},
+                        new double[]{0,0,0,0,0,0,-1,0},
+                        new double[]{0,0,0,0,0,0,-2,0}
                 }
 
         ));
@@ -789,10 +794,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,0,0,5,0},
-                        new double[]{0,0,0,0,0,0,3,0},
-                        new double[]{0,0,0,0,0,0,1,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,0,0,4,0},
+                        new double[]{0,0,0,0,0,0,2,0},
+                        new double[]{0,0,0,0,0,0,-1,0},
+                        new double[]{0,0,0,0,0,0,-2,0}
                 }
 
         ));
@@ -805,10 +810,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,0,0,5,0},
-                        new double[]{0,0,0,0,0,0,3,0},
-                        new double[]{0,0,0,0,0,0,1,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,0,0,4,0},
+                        new double[]{0,0,0,0,0,0,2,0},
+                        new double[]{0,0,0,0,0,0,-1,0},
+                        new double[]{0,0,0,0,0,0,-2,0}
                 }
 
         ));
@@ -821,10 +826,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,0,0,5,0},
-                        new double[]{0,0,0,0,0,0,3,0},
-                        new double[]{0,0,0,0,0,0,1,0},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,0,0,4,0},
+                        new double[]{0,0,0,0,0,0,2,0},
+                        new double[]{0,0,0,0,0,0,-1,0},
+                        new double[]{0,0,0,0,0,0,-2,0}
                 }
 
         ));
@@ -840,10 +845,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,0,0,0,5},
-                        new double[]{0,0,0,0,0,0,0,3},
-                        new double[]{0,0,0,0,0,0,0,1},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,0,0,0,4},
+                        new double[]{0,0,0,0,0,0,0,2},
+                        new double[]{0,0,0,0,0,0,0,-1},
+                        new double[]{0,0,0,0,0,0,0,-2}
                 }
 
         ));
@@ -856,10 +861,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,0,0,0,5},
-                        new double[]{0,0,0,0,0,0,0,3},
-                        new double[]{0,0,0,0,0,0,0,1},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,0,0,0,4},
+                        new double[]{0,0,0,0,0,0,0,2},
+                        new double[]{0,0,0,0,0,0,0,-1},
+                        new double[]{0,0,0,0,0,0,0,-2}
                 }
 
         ));
@@ -872,10 +877,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,0,0,0,5},
-                        new double[]{0,0,0,0,0,0,0,3},
-                        new double[]{0,0,0,0,0,0,0,1},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,0,0,0,4},
+                        new double[]{0,0,0,0,0,0,0,2},
+                        new double[]{0,0,0,0,0,0,0,-1},
+                        new double[]{0,0,0,0,0,0,0,-2}
                 }
 
         ));
@@ -888,10 +893,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,0,0,0,5},
-                        new double[]{0,0,0,0,0,0,0,3},
-                        new double[]{0,0,0,0,0,0,0,1},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,0,0,0,4},
+                        new double[]{0,0,0,0,0,0,0,2},
+                        new double[]{0,0,0,0,0,0,0,-1},
+                        new double[]{0,0,0,0,0,0,0,-2}
                 }
 
         ));
@@ -904,10 +909,10 @@ public class Questionnaire extends AppCompatActivity {
                         "Strongly Disagree"
                 },
                 new double[][]{
-                        new double[]{0,0,0,0,0,0,0,5},
-                        new double[]{0,0,0,0,0,0,0,3},
-                        new double[]{0,0,0,0,0,0,0,1},
-                        new double[]{0,0,0,0,0,0,0,0}
+                        new double[]{0,0,0,0,0,0,0,4},
+                        new double[]{0,0,0,0,0,0,0,2},
+                        new double[]{0,0,0,0,0,0,0,-1},
+                        new double[]{0,0,0,0,0,0,0,-2}
                 }
 
         ));
@@ -944,10 +949,10 @@ public class Questionnaire extends AppCompatActivity {
                     }
                 }
 
-                if(currentQuestions.get(0).equals(generalQuestions.get(0))){
+                if(currentQuestions.get(0).equals(generalQuestions.get(0)) && scores[topIndices[0]] > THRESHOLD){
                     currentQuestions.clear();
-                    for(int in : topIndices){
-                        if(scores[in] > THRESHOLD){
+                    for (int in : topIndices) {
+                        if (scores[in] > THRESHOLD) {
                             currentQuestions.addAll(specificQuestions[in]);
                         }
                     }
