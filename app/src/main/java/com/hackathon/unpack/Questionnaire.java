@@ -75,7 +75,7 @@ public class Questionnaire extends AppCompatActivity {
                         "Worried",
                         "Little Interest in things",
                         "Hopeless",
-                        "mood swings",
+                        "Mood Swings",
                         "None of the Above"
                 },
                 new double[][]{
@@ -89,7 +89,7 @@ public class Questionnaire extends AppCompatActivity {
         ));
 
         generalQuestions.add(new Question(
-                "In the last two weeks How often did you feel that way?",
+                "In the last two weeks how often did you feel that way?",
                 new String[]{
                         "only one",
                         "A couple days",
@@ -113,6 +113,7 @@ public class Questionnaire extends AppCompatActivity {
                         "Dreading getting out of bed.",
                         "Waking up in a cold sweat from a nightmare about something that happened in the past.",
                         "You feel like someone is watching you."
+
                 },
                 new double[][]{
                         new double[]{0,0,5,0,0,0,0,0},
@@ -127,9 +128,9 @@ public class Questionnaire extends AppCompatActivity {
         generalQuestions.add(new Question(
                 "How have your eating habits been?",
                 new String[]{
-                        "Less than usual",
+                        "Eating less than usual",
                         "Normal",
-                        "A lot more than usual",
+                        "Eating A lot more than usual",
                         "I go through waves of not eating at all to overeating",
                         "None of the above."
                 },
@@ -221,9 +222,9 @@ public class Questionnaire extends AppCompatActivity {
                         "ADHD",
                         "PTSD",
                         "Substance Abuse",
-                        "Bipolar",
+                        "Bipolar Disorder",
                         "Schizophrenia",
-                        "none of the above"
+                        "None of the above"
                 },
                 new double[][]{
                         new double[]{15,0,0,0,0,0,0,0},
