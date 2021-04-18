@@ -97,12 +97,12 @@ public class Disorder extends AppCompatActivity {
                 if (resource.getString("name").equals(disorder)) {
 
                     try {
-                    JSONArray urls = resource.getJSONArray("URLs");
-                    int len2 = urls.length();
-                    for (int j = 0; j < len2; j++) {
-                        websiteAdapter.add(urls.getString(j));
-                    }
-                    websiteAdapter.notifyDataSetChanged();
+                        JSONArray urls = resource.getJSONArray("URLs");
+                        int len2 = urls.length();
+                        for (int j = 0; j < len2; j++) {
+                            websiteAdapter.add(urls.getString(j));
+                        }
+                        websiteAdapter.notifyDataSetChanged();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -135,6 +135,22 @@ public class Disorder extends AppCompatActivity {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        if( ((TextView)findViewById(R.id.symptoms)).getText().toString().length() == 0){
+            findViewById(R.id.symptom_title).setVisibility(View.GONE);
+        }
+
+        if(websiteAdapter.getCount() == 0){
+            findViewById(R.id.site_title).setVisibility(View.GONE);
+        }
+
+        if(phoneAdapter.getCount() == 0){
+            findViewById(R.id.phonelist_title).setVisibility(View.GONE);
+        }
+
+        if(locationAdapter.getCount() == 0){
+            findViewById(R.id.location_title).setVisibility(View.GONE);
         }
     }
 
