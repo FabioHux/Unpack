@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -12,63 +15,966 @@ public class Questionnaire extends AppCompatActivity {
     private ArrayList<Question> generalQuestions;
     private ArrayList<Question>[] specificQuestions;
     private ArrayList<Question> currentQuestions;
-    private int index = 0;
-    private final int numDisorders = getResources().getStringArray(R.array.disorders).length;
+    private int index = 0, selectedIndex;
+    private int numDisorders;
+    private int[] scores, buttonIDs;
+
+    private RadioGroup optiongroup;
+    private TextView question_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionnaire);
+        optiongroup = findViewById(R.id.options);
+        question_title = findViewById(R.id.question_tv);
+        numDisorders = getResources().getStringArray(R.array.disorders).length;
+
         currentQuestions = new ArrayList<>();
         setUpQuestions();
         currentQuestions.addAll(generalQuestions);
 
-        setNextQuestion(null);
+        scores = new int[numDisorders];
+        buildQuestion(currentQuestions.get(index));
+        selectedIndex = -1;
     }
 
     private void setUpQuestions(){
         //Set up General Questions
         generalQuestions = new ArrayList<>();
+        generalQuestions.add(new Question(
+                "In General when experiencing a mental health episode which one of the following best describes it?",
+                new String[]{
+                        "Pressure in the chest and is usually accompanied with increased heart rate.",
+                        "It's never an episode, just something that always seems to be there or comes and goes in waves.",
+                        "The Episode can be tied to a physical thing or an event.",
+                        "I dont think it's a problem. I have been told it is one.",
+                        "None of the Above"
+                },
+                new double[][]{
+                        new double[]{2,5,0,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,2,5,0},
+                        new double[]{0,0,2,0,5,0,0,0},
+                        new double[]{2,0,0,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+        ));
+        generalQuestions.add(new Question(
+                "In the last two weeks have you felt?",
+                new String[]{
+                        "Nervous or on edge",
+                        "Worried",
+                        "Little Interest in things",
+                        "Hopeless",
+                        "mood swings",
+                        "None of the Above"
+                },
+                new double[][]{
+                        new double[]{1,5,0,2,0,0,0,0},
+                        new double[]{0,5,0,0,0,0,0,0},
+                        new double[]{5,0,0,3,0,3,0,3},
+                        new double[]{5,0,0,0,0,0,0,0},
+                        new double[]{0,0,5,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+        ));
+
+        generalQuestions.add(new Question(
+                "In the last two weeks How often did you feel that way?",
+                new String[]{
+                        "only one",
+                        "A couple days",
+                        "more days than not",
+                        "Everyday",
+                },
+                new double[][]{
+                        new double[]{1,1,1,1,1,1,1,1},
+                        new double[]{1.1,1.1,1.1,1.1,1.1,1.1,1.1,1.1},
+                        new double[]{1.2,1.2,1.2,1.2,1.2,1.2,1.2,1.2},
+                        new double[]{1.3,1.3,1.3,1.3,1.3,1.3,1.3,1.3},
+
+                },
+                generalQuestions.get(generalQuestions.size()-1)
+        ));
+        generalQuestions.add(new Question(
+                "How are you most likely to start your day?",
+                new String[]{
+                        "Weighing yourself",
+                        "Getting “Waked and Baked” or things like that?",
+                        "Dreading getting out of bed.",
+                        "Waking up in a cold sweat from a nightmare about something that happened in the past.",
+                        "You feel like someone is watching you."
+                },
+                new double[][]{
+                        new double[]{0,0,5,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,5,0,0},
+                        new double[]{5,0,0,0,0,0,0,0},
+                        new double[]{0,0,0,0,5,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,5}
+
+                }
+        ));
+        //change weights for questions below
+        generalQuestions.add(new Question(
+                "How have your eating habits been?",
+                new String[]{
+                        "Less than usual",
+                        "Normal",
+                        "A lot more than usual",
+                        "I go through waves of not eating at all to overeating",
+                        "None of the above."
+                },
+                new double[][]{
+                        new double[]{0,0,2,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0},
+                        new double[]{0,0,3,0,0,0,0,0},
+                        new double[]{0,0,5,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+
+                }
+        ));
+        generalQuestions.add(new Question(
+                "How have the people around act?",
+                new String[]{
+                        "They tell you to stop drinking or doing drugs regularly.",
+                        "You feel like they’re always watching you",
+                        "You avoid people",
+                        "People avoid you",
+                        "None of the above."
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,0,5,0,0},
+                        new double[]{0,0,0,0,0,0,0,5},
+                        new double[]{5,0,0,0,0,0,0,0},
+                        new double[]{0,0,0,0,3,3,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+
+                }
+        ));
+        generalQuestions.add(new Question(
+                "What are your views for the future?",
+                new String[]{
+                        "I'm hopeful for the future",
+                        "Each day just feels like a chore",
+                        "It changes from day to day",
+                        "Drugs are the only thing that gets me through it"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,0,0,0,0},
+                        new double[]{5,0,0,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,5,0},
+                        new double[]{0,0,0,0,0,5,0,0}
+
+                }
+        ));
+        generalQuestions.add(new Question(
+                "How have your sleep patterns been",
+                new String[]{
+                        "Restless nights because of recurring nightmares",
+                        "I don't really sleep",
+                        "I can never fall asleep because something is always watching",
+                        "Some nights I sleep a lot and then some night I can't seem to fall asleep.",
+                        "I would rather just sleep all day"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,5,0,0,0},
+                        new double[]{2,5,0,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,5},
+                        new double[]{5,0,0,0,0,0,0,0},
+                        new double[]{3,0,0,0,0,0,0,0}
+
+                }
+        ));
+        generalQuestions.add(new Question(
+                "Do you ever have thoughts about hurting yourself?",
+                new String[]{
+                        "All the time",
+                        "Sometimes",
+                        "Only when I think about a certain event",
+                        "Only when I gained or lost weight ",
+                        "Never"
+                },
+                new double[][]{
+                        new double[]{10,0,0,0,0,0,0,0},
+                        new double[]{5,0,0,0,0,0,0,0},
+                        new double[]{0,0,0,0,5,0,0,0},
+                        new double[]{0,0,5,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+
+                }
+        ));
+        generalQuestions.add(new Question(
+                "Have you been treated for or diagnosed for one of the following:",
+                new String[]{
+                        "Depression",
+                        "Anxiety",
+                        "Eating Disorder",
+                        "ADHD",
+                        "PTSD",
+                        "Substance Abuse",
+                        "Bipolar",
+                        "Schizophrenia",
+                        "none of the above"
+                },
+                new double[][]{
+                        new double[]{15,0,0,0,0,0,0,0},
+                        new double[]{0,15,0,0,0,0,0,0},
+                        new double[]{5,0,15,0,0,0,0,0},
+                        new double[]{0,0,0,15,0,0,0,0},
+                        new double[]{0,0,0,0,15,0,0,0},
+                        new double[]{0,0,0,0,0,15,0,0},
+                        new double[]{0,0,0,0,0,0,15,0},
+                        new double[]{0,0,0,0,0,0,0,15},
+                        new double[]{0,0,0,0,0,0,0,0,}
+
+                }
+        ));
+
 
 
         specificQuestions = new ArrayList[numDisorders];
         int i = 0;
         //Set up questions for Depression
-        specificQuestions[i++] = new ArrayList<>();
+        ArrayList<Question> temp = new ArrayList<>();
+        specificQuestions[i++] = temp;
+        temp.add(new Question(
+                "Do you feel like you have little interest in doing things?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{5,0,0,0,0,0,0,0},
+                        new double[]{3,0,0,0,0,0,0,0},
+                        new double[]{1,0,0,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Are you often feeling down, depressed or hopeless in your day to day life?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{5,0,0,0,0,0,0,0},
+                        new double[]{3,0,0,0,0,0,0,0},
+                        new double[]{1,0,0,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Do you have the trouble falling asleep, or sleeping too much?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{5,0,0,0,0,0,0,0},
+                        new double[]{3,0,0,0,0,0,0,0},
+                        new double[]{1,0,0,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Do you have thoughts that you would be better off dead?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{5,0,0,0,0,0,0,0},
+                        new double[]{3,0,0,0,0,0,0,0},
+                        new double[]{1,0,0,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Are you often tired or have little energy?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{5,0,0,0,0,0,0,0},
+                        new double[]{3,0,0,0,0,0,0,0},
+                        new double[]{1,0,0,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
 
         //Set up questions for Anxiety
-        specificQuestions[i++] = new ArrayList<>();
+        temp = new ArrayList<>();
+        specificQuestions[i++] = temp;
+        temp.add(new Question(
+                "Do you often Feel nervous, anxious or on edge?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,5,0,0,0,0,0,0},
+                        new double[]{0,3,0,0,0,0,0,0},
+                        new double[]{0,1,0,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Are you usually worrying about different things throughout the day?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,5,0,0,0,0,0,0},
+                        new double[]{0,3,0,0,0,0,0,0},
+                        new double[]{0,1,0,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Having trouble sitting still because you're restless?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,5,0,0,0,0,0,0},
+                        new double[]{0,3,0,0,0,0,0,0},
+                        new double[]{0,1,0,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Have you been easily annoyed or irritated?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,5,0,0,0,0,0,0},
+                        new double[]{0,3,0,0,0,0,0,0},
+                        new double[]{0,1,0,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Have a constant feeling that something bad might happen?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,5,0,0,0,0,0,0},
+                        new double[]{0,3,0,0,0,0,0,0},
+                        new double[]{0,1,0,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+
 
         //Set up questions for Eating Disorders
-        specificQuestions[i++] = new ArrayList<>();
+        temp = new ArrayList<>();
+        specificQuestions[i++] = temp;
+        temp.add(new Question(
+                "Do you force yourself to throw up if you feel full?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,5,0,0,0,0,0},
+                        new double[]{0,0,3,0,0,0,0,0},
+                        new double[]{0,0,1,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Does your life mainly focus on food or what you're going to eat?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,5,0,0,0,0,0},
+                        new double[]{0,0,3,0,0,0,0,0},
+                        new double[]{0,0,1,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Do you feel you can't control how much you eat?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,5,0,0,0,0,0},
+                        new double[]{0,0,3,0,0,0,0,0},
+                        new double[]{0,0,1,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Do you see yourself as fat and others think of you as skinny?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,5,0,0,0,0,0},
+                        new double[]{0,0,3,0,0,0,0,0},
+                        new double[]{0,0,1,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Have you gone many hours without eating food, even when you were hungry?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,5,0,0,0,0,0},
+                        new double[]{0,0,3,0,0,0,0,0},
+                        new double[]{0,0,1,0,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
 
         //Set up questions for ADHD
-        specificQuestions[i++] = new ArrayList<>();
+        temp = new ArrayList<>();
+        specificQuestions[i++] = temp;
+        temp.add(new Question(
+                "Do you often find yourself delaying task that take up time or lots of thought?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,5,0,0,0,0},
+                        new double[]{0,0,0,3,0,0,0,0},
+                        new double[]{0,0,0,1,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
 
+        ));
+        temp.add(new Question(
+                "Do you find yourself easily distracted by sounds or activities around you?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,5,0,0,0,0},
+                        new double[]{0,0,0,3,0,0,0,0},
+                        new double[]{0,0,0,1,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Do you often find yourself restless or fidgety?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,5,0,0,0,0},
+                        new double[]{0,0,0,3,0,0,0,0},
+                        new double[]{0,0,0,1,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Do you find yourself having trouble waiting your turn in a line?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,5,0,0,0,0},
+                        new double[]{0,0,0,3,0,0,0,0},
+                        new double[]{0,0,0,1,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Do you find yourself having the feeling of getting up when you have to sit for a long period of time?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,5,0,0,0,0},
+                        new double[]{0,0,0,3,0,0,0,0},
+                        new double[]{0,0,0,1,0,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
         //Set up questions for PTSD
-        specificQuestions[i++] = new ArrayList<>();
+        temp = new ArrayList<>();
+        specificQuestions[i++] = temp;
+        temp.add(new Question(
+                "Do you find yourself fixating on an event from the past?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,5,0,0,0},
+                        new double[]{0,0,0,0,3,0,0,0},
+                        new double[]{0,0,0,0,1,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
 
+        ));
+        temp.add(new Question(
+                "Do you find yourself avoiding things that remind you of that even?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,5,0,0,0},
+                        new double[]{0,0,0,0,3,0,0,0},
+                        new double[]{0,0,0,0,1,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Have you found yourself feeling overly guarded or are easily startled?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,5,0,0,0},
+                        new double[]{0,0,0,0,3,0,0,0},
+                        new double[]{0,0,0,0,1,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Do you find yourself feeling numb or detached from people?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,5,0,0,0},
+                        new double[]{0,0,0,0,3,0,0,0},
+                        new double[]{0,0,0,0,1,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Do you find yourself feeling guilty or unable to stop blaming yourself about an event that happened in the past?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,5,0,0,0},
+                        new double[]{0,0,0,0,3,0,0,0},
+                        new double[]{0,0,0,0,1,0,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
         //Set up questions for Substance Abuse
-        specificQuestions[i++] = new ArrayList<>();
+        temp = new ArrayList<>();
+        specificQuestions[i++] = temp;
+        temp.add(new Question(
+                "Do you find yourself thinking about drugs or alcohol throughout the day?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,0,5,0,0},
+                        new double[]{0,0,0,0,0,3,0,0},
+                        new double[]{0,0,0,0,0,1,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
 
+        ));
+        temp.add(new Question(
+                "Do you find yourself struggling not to consume drugs or alcohol?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,0,5,0,0},
+                        new double[]{0,0,0,0,0,3,0,0},
+                        new double[]{0,0,0,0,0,1,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Have you found yourself needing a larger dose to get the same high?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,0,5,0,0},
+                        new double[]{0,0,0,0,0,3,0,0},
+                        new double[]{0,0,0,0,0,1,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Have you ever skipped one of your responsibilities to consume drugs or alcohol?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,0,5,0,0},
+                        new double[]{0,0,0,0,0,3,0,0},
+                        new double[]{0,0,0,0,0,1,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Have you lost interest in some of your hobbies to take drugs or alcohol?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,0,5,0,0},
+                        new double[]{0,0,0,0,0,3,0,0},
+                        new double[]{0,0,0,0,0,1,0,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
         //Set up questions for Bipolar Disorders
-        specificQuestions[i++] = new ArrayList<>();
+        temp = new ArrayList<>();
+        specificQuestions[i++] = temp;
+        temp.add(new Question(
+                "In some situations have you found yourself more talkative than usual?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,0,0,5,0},
+                        new double[]{0,0,0,0,0,0,3,0},
+                        new double[]{0,0,0,0,0,0,1,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
 
+        ));
+        temp.add(new Question(
+                "Have you ever randomly felt irritated or jumpy?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,0,0,5,0},
+                        new double[]{0,0,0,0,0,0,3,0},
+                        new double[]{0,0,0,0,0,0,1,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Have you ever felt sad and happy at the same time?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,0,0,5,0},
+                        new double[]{0,0,0,0,0,0,3,0},
+                        new double[]{0,0,0,0,0,0,1,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Has your self confidence seem to change rapidly from time to time?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,0,0,5,0},
+                        new double[]{0,0,0,0,0,0,3,0},
+                        new double[]{0,0,0,0,0,0,1,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                " Have you ever felt dull then sharp at random times in the day?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,0,0,5,0},
+                        new double[]{0,0,0,0,0,0,3,0},
+                        new double[]{0,0,0,0,0,0,1,0},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
         //Set up questions for Schizophrenia
-        specificQuestions[i++] = new ArrayList<>();
+        temp = new ArrayList<>();
+        specificQuestions[i++] = temp;
+        temp.add(new Question(
+                "Have you ever heard a voice or voices when no one was around?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,0,0,0,5},
+                        new double[]{0,0,0,0,0,0,0,3},
+                        new double[]{0,0,0,0,0,0,0,1},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Do you get the feeling that your thoughts were taken out of your head?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,0,0,0,5},
+                        new double[]{0,0,0,0,0,0,0,3},
+                        new double[]{0,0,0,0,0,0,0,1},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Do you get the feeling that others can read your thoughts, your thoughts are broadcasted to others?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,0,0,0,5},
+                        new double[]{0,0,0,0,0,0,0,3},
+                        new double[]{0,0,0,0,0,0,0,1},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Have you ever got the feeling that you were not incontrol of yourself, that someone was controlling you?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,0,0,0,5},
+                        new double[]{0,0,0,0,0,0,0,3},
+                        new double[]{0,0,0,0,0,0,0,1},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
+        temp.add(new Question(
+                "Do you get the feeling that someone is spying on you, or watching you?",
+                new String[]{
+                        "Strongly agree",
+                        "Agree",
+                        "Disagree",
+                        "Strongly Disagree"
+                },
+                new double[][]{
+                        new double[]{0,0,0,0,0,0,0,5},
+                        new double[]{0,0,0,0,0,0,0,3},
+                        new double[]{0,0,0,0,0,0,0,1},
+                        new double[]{0,0,0,0,0,0,0,0}
+                }
+
+        ));
     }
 
     public void setNextQuestion(View view){
+        if(selectedIndex >= 0){
+            optiongroup.removeAllViews();
 
+            double[] result =  currentQuestions.get(index).getOptionScores()[selectedIndex];
+
+            int i;
+            for(i = 0; i < result.length; i++){
+                scores[i] += result[i];
+            }
+
+            index++;
+
+            if(index == currentQuestions.size()){
+
+            }else{
+                buildQuestion(currentQuestions.get(index));
+            }
+        }
+    }
+
+    private void buildQuestion(Question question){
+        question_title.setText(question.getQuestion());
+        setOptions(question.getOptions());
+    }
+
+    private void setOptions(String[] options){
+        int i = 0;
+        buttonIDs = new int[options.length];
+        for(;i < options.length; i++){
+            RadioButton button = new RadioButton(this);
+            int id = View.generateViewId();
+            buttonIDs[i] = id;
+
+            button.setId(id);
+            button.setText(options[i]);
+            button.setOnClickListener(this::radioButtonClick);
+            optiongroup.addView(button);
+        }
+    }
+
+    public void radioButtonClick(View view){
+        int id = view.getId();
+
+        int i;
+        for(i = 0; i < buttonIDs.length; i++){
+            if(buttonIDs[i] == id) break;
+        }
+
+        selectedIndex = i;
     }
 
     private class Question{
 
         private String question;
         private String[] options;
-        private int[][] optionScores;
+        private double[][] optionScores;
+        private Question dependence = null;
 
-        public Question(String question, String[] options, int[][] optionScores){
+        public Question(String question, String[] options, double[][] optionScores){
+            this.question = question;
+            this.options = options;
+            this.optionScores = optionScores;
+
+            if(this.optionScores.length != this.options.length ||
+                    this.optionScores[0].length != numDisorders)
+                throw new RuntimeException("Formatting for questions built incorrectly. Exiting.");
+        }
+
+        public Question(String question, String[] options, double[][] optionScores, Question dependence){
+            this.dependence = dependence;
             this.question = question;
             this.options = options;
             this.optionScores = optionScores;
@@ -86,8 +992,20 @@ public class Questionnaire extends AppCompatActivity {
             return options;
         }
 
-        public int[][] getOptionScores(){
+        public double[][] getOptionScores(){
             return optionScores;
+        }
+
+        public void passDependence(Question dependence, double[] scores){
+            if(this.dependence != null && dependence != null && this.dependence.equals(dependence)){
+                int i = 0;
+                for(;i < optionScores.length; i++){
+                    int j = 0;
+                    for(;j < optionScores[i].length; j++){
+                        optionScores[i][j] *= scores[j];
+                    }
+                }
+            }
         }
     }
 }
