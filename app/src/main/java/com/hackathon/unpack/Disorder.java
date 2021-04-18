@@ -62,7 +62,7 @@ public class Disorder extends AppCompatActivity {
 
 
         phoneListView.setOnItemClickListener((parent, view, position, id) -> {
-            Intent phoneIntent = new Intent(Intent.ACTION_CALL);
+            Intent phoneIntent = new Intent(Intent.ACTION_DIAL);
             phoneIntent.setData(Uri.parse("tel:"+phoneAdapter.getItem(position)));
             if (ActivityCompat.checkSelfPermission(this,
                     Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
